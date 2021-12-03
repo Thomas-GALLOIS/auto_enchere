@@ -8,6 +8,8 @@
 
 include_once __DIR__ . "/../views/AbstractView.php"; 
 include_once __DIR__ . "/../views/NavbarView.php"; 
+include_once __DIR__ . "/../views/MaxEnchereView.php";
+
 
 /**
  * Vue Home
@@ -43,7 +45,17 @@ class ListeEnchereView extends AbstractView
 
             <div id="mainContainer" >
                 <div class="scroll-enchere">
-                    <center><small>de la plus haute mise à la plus basse</small></center><br> 
+                    <?php
+                        $dbh = Database::createDBConnection();
+
+                        $maxEnchere = MaxEnchereModel::getMaxEnchereByAnnonce($dbh, $_GET["id"]) ;
+                        $maxEnchereWinner = MaxEnchereModel::getWinnerByAnnonce($dbh, $maxEnchere);
+
+                        $maxEnchere = new MaxEnchereView($maxEnchere,$maxEnchereWinner);
+                        $maxEnchere -> render();
+                    ?>
+
+                    <center><small>mise de la plus haute à la plus basse</small></center><br> 
                     <?php 
                     foreach ($this->encheres as $encheres) { ?>
                         <b><u>Mise</u>:</b> <?= $encheres -> mise ?>€<br>

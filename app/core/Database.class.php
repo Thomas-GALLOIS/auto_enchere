@@ -17,7 +17,7 @@ abstract class Database
 
     const ADDRESS = "mysql:dbname=mp_ti_tchi_mo;host:localhost";
     const USER = "root";
-    const PASSWORD = "";
+    const PASSWORD = "root";
 
     /**
      * Création d'un connexion à la base de données

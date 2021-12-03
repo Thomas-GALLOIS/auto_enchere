@@ -28,7 +28,7 @@ class EnchereModel
     /**
      * Constructeur
      */
-    public function __construct($id,$id_utilisateurs, $id_annonces, $mise, $date, $dbh)
+    public function __construct($id, $id_utilisateurs, $id_annonces, $mise, $date, $dbh)
     {
         /* Nettoyage des données */
         $this->id = $id;
@@ -67,18 +67,18 @@ class EnchereModel
     {
 
         $query = $this->dbh->prepare("INSERT INTO enchere (id_annonces,id_utilisateurs,mise,date) VALUES (?,?,?,?)");
-        return $query->execute([$this->id_annonces,$this->id_utilisateurs,$this->mise,$this->date]);
+        return $query->execute([$this->id_annonces, $this->id_utilisateurs, $this->mise, $this->date]);
     }
 
 
     /**
      * Récupération de contact par email
      */
-    public static function fetchEncherebyID($dbh,$id)
+    public static function fetchEncherebyID($dbh, $id)
     {
 
-        $query = $dbh->prepare("SELECT * FROM enchere WHERE id_annonces=".$id);
-        $query->execute() ;
+        $query = $dbh->prepare("SELECT * FROM enchere WHERE id_annonces=" . $id);
+        $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -86,13 +86,13 @@ class EnchereModel
         foreach ($results as $result) {
             array_push($encheres, new EnchereModel(
                 $result['id'],
-                $result['id_utilisateurs'], 
+                $result['id_utilisateurs'],
                 $result['id_annonces'],
                 $result['mise'],
-                $dbh));
+                $dbh
+            ));
         }
 
         return $encheres;
     }
-
 }

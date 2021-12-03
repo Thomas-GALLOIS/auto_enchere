@@ -16,6 +16,7 @@ include_once __DIR__ . "/controllers/LoginController.php";
 include_once __DIR__ . "/controllers/EnchereController.php";
 include_once __DIR__ . "/controllers/DeconnexionController.php";
 include_once __DIR__ . "/controllers/ListeEnchereController.php";
+include_once __DIR__ . "/controllers/MaxEnchereController.php";
 
 
 
@@ -52,6 +53,7 @@ $loginController = new LoginController();
 $enchereController = new EnchereController();
 $DeconnexionController = new DeconnexionController();
 $listeEnchereController = new ListeEnchereController();
+$maxEnchereController = new MaxEnchereController();
 
 
 $router->get("/form",  [$homeController, 'inscription_view']); // GET /
@@ -62,6 +64,8 @@ $router->get("/mentions-legales",  [$homeController, 'mentions_legales']); // GE
 $router->get("/",  [$accueilController, 'render']);
 
 $router->get("/test",  [$listeEnchereController, 'render']);
+
+$router->get("/maxenchere",  [$maxEnchereController, 'render']);
 
 
 $router->get("/",  [$loginController, 'render']); // GET /

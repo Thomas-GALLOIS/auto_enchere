@@ -6,8 +6,8 @@
  */
 
 
-include_once __DIR__ . "/../views/AbstractView.php"; 
-include_once __DIR__ . "/../views/NavbarView.php"; 
+include_once __DIR__ . "/../views/AbstractView.php";
+include_once __DIR__ . "/../views/NavbarView.php";
 include_once __DIR__ . "/../views/ListeEnchereView.php";
 include_once __DIR__ . "/../views/EnchereView.php";
 
@@ -18,11 +18,11 @@ include_once __DIR__ . "/../views/EnchereView.php";
 class AnnonceView extends AbstractView
 {
 
-    protected $annonces ;
+    protected $annonces;
 
     public function __construct($annonces)
     {
-        $this->annonces = $annonces ;
+        $this->annonces = $annonces;
     }
 
     /**
@@ -42,63 +42,62 @@ class AnnonceView extends AbstractView
         </head>
 
         <body>
-            <?php 
-                $navbar = new NavbarView();
-                $navbar->render();
+            <?php
+            $navbar = new NavbarView();
+            $navbar->render();
             ?>
             <div class="container">
                 <div id="mainContainer">
 
                     <?php foreach ($this->annonces as $annonces) { ?>
-                        
                         <div class="annonce-container">
                             <h2><?= $annonces->title ?></h2>
 
                             <div class="bloc-annonce">
                                 <div class="photo-annonce">
-                                    <img src="./assets/src/voiture.jpg" width="70%">
+                                    <img src="./assets/src/voiture.jpeg" width="70%">
                                 </div>
                                 <div class="bloc-details-annonce">
                                     <div class="details-annonce">
                                         <p>
-                                            <i>Publié par <?= $annonces->nom?> <?= $annonces->prenom?></i><br><br>
-                                            Marque: <?= $annonces->marque?></b><br/>
-                                            Modele: <?= $annonces->modele?></h4><br/>
-                                            Puissance: <?= $annonces->puissance?>CH<br/>
-                                            Mise en circulation: <?= $annonces->annee?><br/><br/>
+                                            <i>Publié par <?= $annonces->nom ?> <?= $annonces->prenom ?></i><br><br>
+                                            Marque: <?= $annonces->marque ?></b><br />
+                                            Modele: <?= $annonces->modele ?></h4><br />
+                                            Puissance: <?= $annonces->puissance ?>CH<br />
+                                            Mise en circulation: <?= $annonces->annee ?><br /><br />
 
-                                            Details supplémentaires:<br/>
-                                            <?= $annonces->description?><br/><br/>
+                                            Details supplémentaires:<br />
+                                            <?= $annonces->description ?><br /><br />
                                         </p>
                                     </div>
                                     <div class="prix">
-                                        Mise à prix<br/>
-                                        <span class="prix-depart"><?= $annonces->prix_depart?>€</span>
+                                        Mise à prix<br />
+                                        <span class="prix-depart"><?= $annonces->prix_depart ?>€</span>
                                     </div>
                                 </div>
-    
+
                             </div>
 
                         </div>
-                        
-                    
+
+
                     <?php } ?>
-                            
-                    
+
+
 
                 </div>
-                        
-                <div class="list-encheres">
-                        
-                    <?php
-                        $inputEnchere = new EnchereView();
-                        $inputEnchere->render();
 
-                        $dbh = Database::createDBConnection();
-                        $enchere = ListeEnchereModel::fetchByidAnnonce($dbh,$_GET["id"]) ;
-                        
-                        $encheres = new ListeEnchereView($enchere);
-                        $encheres -> render();
+                <div class="list-encheres">
+
+                    <?php
+                    $dbh = Database::createDBConnection();
+
+                    $inputEnchere = new EnchereView();
+                    $inputEnchere->render();
+
+                    $enchere = ListeEnchereModel::fetchByidAnnonce($dbh, $_GET["id"]);
+                    $encheres = new ListeEnchereView($enchere);
+                    $encheres->render();
 
                     ?>
 
@@ -106,14 +105,12 @@ class AnnonceView extends AbstractView
             </div>
         </body>
         <?php
-    $footer_view = new FooterView() ;
-    $footer_view->render() ;
-?>
+        $footer_view = new FooterView();
+        $footer_view->render();
+        ?>
+
         </html>
 
 <?php
     }
 }
-
-
-

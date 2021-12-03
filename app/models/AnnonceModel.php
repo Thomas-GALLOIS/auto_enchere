@@ -132,16 +132,16 @@ class AnnonceModel
         $dbh = database::createDBConnection();
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
         $query = $dbh->prepare(
-            "SELECT u.*, a.*, e.* FROM utilisateurs u 
-            INNER JOIN annonces a ON u.id = a.id_utilisateurs
-            INNER JOIN enchere e ON a.id = e.id_annonces
+            "SELECT u.*, a.*, e.* FROM annonces a 
+            INNER JOIN utilisateurs u ON u.id = a.id_utilisateurs
+            LEFT JOIN enchere e ON a.id = e.id_annonces
             WHERE a.id=".$_GET['id']);
         $query->execute();
         $result = $query ->fetch();
 
-        if(!$result) {
-            return false;
-        }
+        // if(!$result) {
+        //     return false;
+        // }
 
         return new AnnonceModel(
             $result['id'],

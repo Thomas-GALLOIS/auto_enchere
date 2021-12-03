@@ -52,7 +52,7 @@ class AccueilView extends AbstractView
                 foreach ($this->annonces as $annonces) { ?>
                     <div class="annonce">
                         <a href="<?= $this->base_url() ?>annonce?id=<?=$annonces->id?>">
-                        <img src="./assets/src/voiture.jpg" width="300px">
+                        <img src="./assets/src/voiture.jpeg" width="300px">
                             <h2><?= $annonces->marque ?></h2>
                             <h4><?= $annonces->modele?></h3>
                             <p>Mise à prix</p>
